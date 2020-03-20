@@ -3,6 +3,7 @@ const dgram = require('dgram')
 class UdpClient {
   constructor() {
     this.server = dgram.createSocket('udp4')
+    this.server.bind(41235, 'localhost')
     this.server.send(Buffer.from('hello'), 0, 6, 41234, 'localhost', this.onSuccess.bind(this))
     this.server.on('message', this.onMessage.bind(this))
   }
