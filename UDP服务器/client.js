@@ -7,10 +7,18 @@ class UdpClient {
     this.server.on('message', this.onMessage.bind(this))
   }
 
+  /**
+   * 发送消息成功
+   */
   onSuccess(...args) {
     console.log(...args)
   }
 
+  /**
+   * 监听另一方发送的消息
+   * @param {string} msg 消息内容
+   * @param {rinfo}
+   */
   onMessage(msg, rinfo) {
     console.log(msg.toString())
   }
