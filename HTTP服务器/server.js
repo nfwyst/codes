@@ -14,7 +14,18 @@ server
       .on('end', () => {
         let r = Buffer.concat(result)
         console.log(`\r\n${r.toString('utf8')}`)
-        res.end(r)
+        const contentType = req.headers['content-type']
+        switch (contentType) {
+          case 'application/x-www-form-urlencoded':
+            r = querystring.parse(r)
+            break
+          case 'application/json':
+            r = JSON.parse(r)
+            break
+          default:
+            break
+        }
+        res.end(typeof r === 'string' ? r : JSON.stringify(r))
       })
   })
   .on('close', () => {
