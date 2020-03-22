@@ -3,7 +3,7 @@ const path = require('path')
 
 const child = spawn('node', ['test3.js'], {
   cwd: path.join(__dirname),
-  stdio: ['pipe', 'ipc', 'pipe']
+  stdio: ['ipc', 'ignore', 'ignore']
 })
 
 child.on('message', msg => console.log(msg))
