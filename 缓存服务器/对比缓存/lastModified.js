@@ -2,6 +2,7 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 const mime = require('mime')
+const path = require('path')
 
 http
   .createServer(function (req, res) {
