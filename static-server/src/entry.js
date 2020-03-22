@@ -7,14 +7,12 @@ const path = require('path')
 const { promisify, inspect } = require('util')
 const fs = require('fs')
 const mime = require('mime')
+const art = require('art-template')
 
 const stat = promisify(fs.stat)
+const readdir = promisify(fs.readdir)
 
 class Server {
-  constructor() {
-
-  }
-
   start() {
     const server = http.createServer()
     server.on('request', this.onRequest.bind(this))
@@ -24,6 +22,12 @@ class Server {
       })
   }
 
+  compileTemplate(name, data) {
+    const filepath = path.resolve(__dirname, `./template/${name}.art`)
+    const html = art(filepath, data)
+    return html
+  }
+
   async onRequest(req, res) {
     const { pathname } = url.parse(req.url)
     if (pathname === '/favicon.ico') return res.end()
@@ -31,13 +35,21 @@ class Server {
     try {
       const stats = await stat(filepath)
       if (stats.isDirectory()) {
-
+        const files = await readdir(filepath)
+        const html = this.compileTemplate('list', {
+          title: pathname,
+          files: files.map(file => ({
+            url: path.join(pathname, file),
+            name: file,
+          }))
+        })
+        res.setHeader('Content-Type', 'text/html')
+        res.end(html)
       } else {
         this.sendFile(req, res, filepath)
       }
     } catch (e) {
       debug(inspect(e, false, 3, true))
-      debug(filepath, config)
       this.sendError(req, res)
     }
   }
