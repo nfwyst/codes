@@ -1,0 +1,30 @@
+#! /user/bin/env node
+
+const yargs = require('yargs')
+const Server = require('../src/entry')
+
+const { argv } = yargs
+  .option('d', {
+    alias: 'root',
+    demand: false,
+    type: 'string',
+    default: process.cwd(),
+    description: '静态文件根目录'
+  })
+  .option('o', {
+    alias: 'host',
+    demand: false,
+    default: 'localhost',
+    type: 'string',
+    description: '监听的主机'
+  })
+  .option('p', {
+    alias: 'port',
+    demand: false,
+    type: 'number',
+    default: 8080,
+    description: '端口号'
+  })
+  .usage('static-server -d /path/to/user/static/folder -p 8080 -o localhost')
+
+new Server(argv).start()

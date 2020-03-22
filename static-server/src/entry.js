@@ -13,10 +13,16 @@ const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
 
 class Server {
+  constructor(argv) {
+    if (argv) {
+      Object.assign(config, argv)
+    }
+  }
+
   start() {
     const server = http.createServer()
     server.on('request', this.onRequest.bind(this))
-      .listen(config.port, () => {
+      .listen(config.port, config.host, () => {
         const url = `${config.host}:${config.port}`
         debug(`server started at port ${chalk.green(url)}`)
       })
@@ -66,4 +72,5 @@ class Server {
   }
 }
 
-new Server().start()
+
+module.exports = Server
