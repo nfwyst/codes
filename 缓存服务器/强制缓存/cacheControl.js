@@ -15,7 +15,7 @@ http
         return res.end(err.message)
       }
       res.setHeader('Content-Type', mime.getType(filepath))
-      res.setHeader('Cache-Control', 'max-age=10')
+      res.setHeader('Cache-Control', 'max-age=30')
       fs.createReadStream(filepath).pipe(res)
     })
   })
