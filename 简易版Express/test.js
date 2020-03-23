@@ -14,6 +14,9 @@ app
   .all('/all', (req, res) => {
     res.end('this is all\r\n')
   })
+  .get('*', (req, res) => {
+    res.end('well this is wildcase')
+  })
   .listen(8000, () => {
     console.log('server is running on port 8000')
   })

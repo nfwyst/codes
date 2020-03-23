@@ -19,7 +19,7 @@ class App {
     const findRoute = this.routes.find(route => {
       const { method, path } = route
       const { pathname } = url.parse(req.url)
-      return method === req.method.toLowerCase() && path === pathname
+      return method === req.method.toLowerCase() && (path === pathname || path === '*')
     })
     if (findRoute) return findRoute.handler(req, res)
     res.statusCode = 404
