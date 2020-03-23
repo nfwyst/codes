@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/nfwyst/codes#readme",
   "dependencies": {
-    "http-proxy": "^1.18.0",
     "mime": "^2.4.4"
   }
 }
