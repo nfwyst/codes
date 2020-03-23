@@ -51,7 +51,7 @@ class Server {
             name: file,
           }))
         })
-        res.setHeader('Content-Type', 'text/html')
+        res.setHeader('Content-Type', 'text/html; charset=utf8')
         res.end(html)
       } else {
         this.sendFile(req, res, filepath, stats)
@@ -102,7 +102,7 @@ class Server {
 
   _sendFile(req, res, filepath) {
     res.statusCode = 200
-    res.setHeader('Content-Type', mime.getType(filepath))
+    res.setHeader('Content-Type', `${mime.getType(filepath)}; charset=utf8`)
     const acceptEncoding = req.headers['accept-encoding']
     let transfer = null
     // 压缩
