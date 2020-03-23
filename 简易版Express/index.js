@@ -20,16 +20,17 @@ class App {
     const { pathname } = url.parse(req.url)
 
     const next = () => {
-      if (index === this.routes.length) {
+      if (index >= this.routes.length) {
         res.statusCode = 404
         res.setHeader('Content-Type', 'text/html; charset=utf8')
         return res.end('404 Not Found')
       }
       const { method, path, handler } = this.routes[index++]
       if (!method) { // 中间件
-        if (pathname.startsWith(path)) {
+        if (pathname.startsWith(`${path}/` || path === '/')) {
           return handler(req, res, next)
         }
+        next()
       } else { // 路由
         if (method === req.method.toLowerCase() && (path === pathname || path === '*')) return handler(req, res)
         next()
