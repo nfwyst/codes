@@ -14,6 +14,10 @@ app
   .all('/all', (req, res) => {
     res.end('this is all\r\n')
   })
+  .use((req, res, next) => {
+    console.log(req.url, req.headers)
+    next()
+  })
   .get('*', (req, res) => {
     res.end('well this is wildcase')
   })

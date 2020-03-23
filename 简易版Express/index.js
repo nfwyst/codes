@@ -16,15 +16,27 @@ class App {
   }
 
   handler(req, res) {
-    const findRoute = this.routes.find(route => {
-      const { method, path } = route
-      const { pathname } = url.parse(req.url)
-      return method === req.method.toLowerCase() && (path === pathname || path === '*')
-    })
-    if (findRoute) return findRoute.handler(req, res)
-    res.statusCode = 404
-    res.setHeader('Content-Type', 'text/html; charset=utf8')
-    return res.end('404 Not Found')
+    let index = 0
+    const { pathname } = url.parse(req.url)
+
+    const next = () => {
+      if (index === this.routes.length) {
+        res.statusCode = 404
+        res.setHeader('Content-Type', 'text/html; charset=utf8')
+        return res.end('404 Not Found')
+      }
+      const { method, path, handler } = this.routes[index++]
+      if (!method) { // 中间件
+        if (pathname.startsWith(path)) {
+          return handler(req, res, next)
+        }
+      } else { // 路由
+        if (method === req.method.toLowerCase() && (path === pathname || path === '*')) return handler(req, res)
+        next()
+      }
+    }
+
+    next()
   }
 
   listen(...args) {
@@ -37,6 +49,18 @@ class App {
     http.METHODS.forEach(method => {
       method = method.toLowerCase()
       this.routes.push({ method, path, handler })
+    })
+    return this
+  }
+
+  use(path, handler) {
+    if (typeof handler !== 'function') {
+      handler = path
+      path = '/'
+    }
+    this.routes.push({
+      path,
+      handler
     })
     return this
   }
