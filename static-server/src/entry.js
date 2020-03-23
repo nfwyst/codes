@@ -71,7 +71,7 @@ class Server {
     let isNoneMatch = req.headers['is-none-match']
     let ifModifiedSince = req.headers['if-modified-since']
     res.setHeader('Cache-Control', 'private, max-age=30')
-    res.setHeader('Expires', new Date(Date.now() + 30 * 1000))
+    res.setHeader('Expires', new Date(Date.now() + 30 * 1000).toGMTString())
 
     // 缓存
     if (isNoneMatch) {
