@@ -8,6 +8,7 @@ const { promisify, inspect } = require('util')
 const fs = require('fs')
 const mime = require('mime')
 const art = require('art-template')
+const zlib = require('zlib')
 
 const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
@@ -68,6 +69,14 @@ class Server {
   sendFile(req, res, filepath) {
     res.statusCode = 200
     res.setHeader('Content-Type', mime.getType(filepath))
+    const acceptEncoding = req.headers['accept-encoding']
+    let transfer = null
+    if (/\bgzip\b/.test(acceptEncoding)) {
+      transfer = zlib.createGzip()
+    } else if (/\bdeflate\b/.test(acceptEncoding)) {
+      transfer = zlib.createDeflate()
+    }
+    if (transfer) return fs.createReadStream(filepath).pipe(transfer).pipe(res)
     fs.createReadStream(filepath).pipe(res)
   }
 }
