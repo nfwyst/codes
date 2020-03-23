@@ -32,6 +32,14 @@ class App {
     this.server.listen(...args)
     return this
   }
+
+  all(path, handler) {
+    http.METHODS.forEach(method => {
+      method = method.toLowerCase()
+      this.routes.push({ method, path, handler })
+    })
+    return this
+  }
 }
 
 class Express {
