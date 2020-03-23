@@ -107,8 +107,10 @@ class Server {
     let transfer = null
     // 压缩
     if (/\bgzip\b/.test(acceptEncoding)) {
+      res.setHeader('Content-Encoding', 'gzip')
       transfer = zlib.createGzip()
     } else if (/\bdeflate\b/.test(acceptEncoding)) {
+      res.setHeader('Content-Encoding', 'deflate')
       transfer = zlib.createDeflate()
     }
     if (transfer) return fs.createReadStream(filepath).pipe(transfer).pipe(res)
