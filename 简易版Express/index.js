@@ -27,7 +27,7 @@ class App {
       }
       const { method, path, handler } = this.routes[index++]
       if (!method) { // 中间件
-        if (pathname.startsWith(`${path}/` || path === '/')) {
+        if (pathname.startsWith(`${path}/`) || path === '/' || path === pathname) {
           return handler(req, res, next)
         }
         next()
