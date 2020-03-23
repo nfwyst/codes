@@ -2,8 +2,8 @@ const http = require('http')
 const url = require('url')
 
 class App {
-  constructor(...args) {
-    this.options = args
+  constructor(options = {}) {
+    this.options = options
     this.server = null
     this.routes = []
   }
@@ -37,9 +37,9 @@ class App {
 }
 
 class Express {
-  constructor(...args) {
-    return new App(...args)
+  constructor(opt) {
+    return new App(opt)
   }
 }
 
-module.exports = (...args) => new Express(...args)
+module.exports = (opt) => new Express(opt)
