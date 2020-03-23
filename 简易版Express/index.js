@@ -6,6 +6,13 @@ class App {
     this.options = options
     this.server = null
     this.routes = []
+    http.METHODS.forEach(method => {
+      method = method.toLowerCase()
+      this[method] = (path, handler) => {
+        this.routes.push({ method, path, handler })
+        return this
+      }
+    })
   }
 
   handler(req, res) {
@@ -23,15 +30,6 @@ class App {
   listen(...args) {
     this.server = http.createServer(this.handler.bind(this))
     this.server.listen(...args)
-    return this
-  }
-
-  get(urlPath, routeHandler) {
-    this.routes.push({
-      method: 'get',
-      path: urlPath,
-      handler: routeHandler
-    })
     return this
   }
 }
