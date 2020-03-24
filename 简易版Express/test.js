@@ -15,15 +15,18 @@ app
     res.end('this is all\r\n')
   })
   .use((req, res, next) => {
-    console.log(req.path, req.query)
     res.setHeader('Content-Type', 'text/html; charset=utf8')
-    next('错误')
+    next()
   })
-  .get('*', (req, res) => {
-    res.end('well this is wildcase')
-  })
+  // .get('*', (req, res) => {
+  //   res.end('well this is wildcase')
+  // })
   .use((err, req, res, next) => {
     res.end('错误处理中间件' + err)
+  })
+  .get('/user/:name/:age', (req, res) => {
+    console.log(req.params)
+    res.end('hello')
   })
   .listen(8000, () => {
     console.log('server is running on port 8000')

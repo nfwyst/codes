@@ -9,7 +9,17 @@ class App {
     http.METHODS.forEach(method => {
       method = method.toLowerCase()
       this[method] = (path, handler) => {
-        this.routes.push({ method, path, handler })
+        const layer = { method, path, handler }
+        // 解析 params
+        if (path.includes(':')) {
+          const paramsNames = []
+          path = path.replace(/:([^\/]+)/g, (pattern, match) => {
+            paramsNames.push(match)
+            return '([^\/]+)'
+          })
+          Object.assign(layer, { path: new RegExp(path), paramsNames })
+        }
+        this.routes.push(layer)
         return this
       }
     })
@@ -21,11 +31,11 @@ class App {
 
     const next = (err) => {
       if (index >= this.routes.length) {
-        res.statusCode = 404
+        res.statusCode = err ? 500 : 404
         res.setHeader('Content-Type', 'text/html; charset=utf8')
-        return res.end('404 Not Found')
+        return err ? res.end(err.toString()) : res.end('404 Not Found')
       }
-      const { method, path, handler } = this.routes[index++]
+      const { method, path, handler, paramsNames } = this.routes[index++]
       if (err) {
         if (!method) { // 中间件
           if (pathname.startsWith(`${path}/`) || path === '/' || path === pathname) { // 路径匹配
@@ -37,11 +47,22 @@ class App {
         }
       } else if (!method) { // 中间件
         if (pathname.startsWith(`${path}/`) || path === '/' || path === pathname) {
-          return handler(req, res, next)
+          if (handler.length !== 4) return handler(req, res, next)
         }
         next()
       } else { // 路由
-        if (method === req.method.toLowerCase() && (path === pathname || path === '*')) return handler(req, res)
+        if (paramsNames) { // 带路径参数
+          req.params = {}
+          let matchers = pathname.match(path)
+          if (matchers) {
+            paramsNames.forEach((item, index) => {
+              req.params[item] = matchers[index + 1]
+            })
+            return handler(req, res)
+          }
+        } else {
+          if (method === req.method.toLowerCase() && (path === pathname || path === '*')) return handler(req, res)
+        }
         next()
       }
     }
@@ -58,7 +79,16 @@ class App {
   all(path, handler) {
     http.METHODS.forEach(method => {
       method = method.toLowerCase()
-      this.routes.push({ method, path, handler })
+      const layer = { method, path, handler }
+      if (path.includes(':')) {
+        const paramsNames = []
+        path = path.replace(/:([^\/]+)/g, (pattern, match) => {
+          paramsNames.push(match)
+          return '([^\/]+)'
+        })
+        Object.assign(layer, { path: new RegExp(path), paramsNames })
+      }
+      this.routes.push(layer)
     })
     return this
   }
