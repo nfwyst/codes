@@ -16,10 +16,14 @@ app
   })
   .use((req, res, next) => {
     console.log(req.url, req.headers)
-    next()
+    res.setHeader('Content-Type', 'text/html; charset=utf8')
+    next('错误')
   })
   .get('*', (req, res) => {
     res.end('well this is wildcase')
+  })
+  .use((err, req, res, next) => {
+    res.end('错误处理中间件' + err)
   })
   .listen(8000, () => {
     console.log('server is running on port 8000')

@@ -19,14 +19,23 @@ class App {
     let index = 0
     const { pathname } = url.parse(req.url)
 
-    const next = () => {
+    const next = (err) => {
       if (index >= this.routes.length) {
         res.statusCode = 404
         res.setHeader('Content-Type', 'text/html; charset=utf8')
         return res.end('404 Not Found')
       }
       const { method, path, handler } = this.routes[index++]
-      if (!method) { // 中间件
+      if (err) {
+        if (!method) { // 中间件
+          if (pathname.startsWith(`${path}/`) || path === '/' || path === pathname) { // 路径匹配
+            if (handler.length === 4) return handler(err, req, res, next)
+          }
+          next(err)
+        } else { // 路由
+          next(err)
+        }
+      } else if (!method) { // 中间件
         if (pathname.startsWith(`${path}/`) || path === '/' || path === pathname) {
           return handler(req, res, next)
         }
