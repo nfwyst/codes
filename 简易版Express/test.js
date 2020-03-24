@@ -15,7 +15,7 @@ app
     res.end('this is all\r\n')
   })
   .use((req, res, next) => {
-    console.log(req.url, req.headers)
+    console.log(req.path, req.query)
     res.setHeader('Content-Type', 'text/html; charset=utf8')
     next('错误')
   })

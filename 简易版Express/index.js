@@ -78,7 +78,23 @@ class App {
 
 class Express {
   constructor(opt) {
-    return new App(opt)
+    const app = new App(opt)
+    app.use(this.parseUrl)
+    return app
+  }
+
+  /**
+   * @param {object} req 请求
+   * @param {object} res 响应
+   * @param {function} next 下一个中间件
+   */
+  parseUrl(req, res, next) {
+    const { query, pathname } = url.parse(req.url, true)
+    const { hostname } = req.headers
+    Object.assign(req, {
+      query, path: pathname, hostname
+    })
+    next()
   }
 }
 
