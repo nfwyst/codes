@@ -24,6 +24,10 @@ app
   .use((err, req, res, next) => {
     res.end('错误处理中间件' + err)
   })
+  .param('name', (req, res, next, name) => {
+    console.log('name is', name)
+    next()
+  })
   .get('/user/:name/:age', (req, res) => {
     console.log(req.params)
     res.end('hello')

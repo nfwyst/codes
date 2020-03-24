@@ -23,6 +23,7 @@ class App {
         return this
       }
     })
+    this.paramHandlers = {}
   }
 
   handler(req, res) {
@@ -58,7 +59,15 @@ class App {
             paramsNames.forEach((item, index) => {
               req.params[item] = matchers[index + 1]
             })
-            return handler(req, res)
+            let hasFn = false
+            paramsNames.forEach((item, index) => {
+              const fn = this.paramHandlers[item]
+              if (fn) {
+                hasFn = true
+                fn(req, res, () => handler(req, res), req.params[item])
+              }
+            })
+            return !hasFn ? handler(req, res) : null
           }
         } else {
           if (method === req.method.toLowerCase() && (path === pathname || path === '*')) return handler(req, res)
@@ -102,6 +111,11 @@ class App {
       path,
       handler
     })
+    return this
+  }
+
+  param(name, handler) {
+    this.paramHandlers[name] = handler
     return this
   }
 }
