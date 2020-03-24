@@ -90,9 +90,9 @@ class Express {
    */
   parseUrl(req, res, next) {
     const { query, pathname } = url.parse(req.url, true)
-    const { hostname } = req.headers
+    const { host } = req.headers
     Object.assign(req, {
-      query, path: pathname, hostname
+      query, path: pathname, hostname: host.split(':')[0]
     })
     next()
   }
