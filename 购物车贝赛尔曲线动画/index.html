@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shop</title>
+  <style>
+    .item {
+      height: 20px;
+      width: 20px;
+      display: inline-block;
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      background-color: #00aa00;
+      border-radius: 50%;
+      animation: hor-animation 2s .5s 2;
+      animation-timing-function: cubic-bezier(0, .77, .35, .98);
+    }
+
+    .wrapper {
+      animation: ver-animation 2s .5s 2;
+      animation-timing-function: linear;
+    }
+
+    @keyframes hor-animation {
+      0% {
+        transform: translateX(0px)
+      }
+
+      100% {
+        transform: translateX(400px);
+      }
+    }
+
+    @keyframes ver-animation {
+      0% {
+        transform: translateY(0px)
+      }
+
+      100% {
+        transform: translateY(400px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="item"></div>
+  </div>
+</body>
+
+</html>
