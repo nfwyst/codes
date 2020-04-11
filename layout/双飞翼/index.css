@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  color: red;
+}
+
+.left {
+  background: orange;
+  float: left;
+  width: 300px;
+  margin-left: -100%;
+}
+
+.right {
+  float: left;
+  background: blue;
+  width: 200px;
+  margin-left: -200px;
+}
+
+.middle {
+  background: yellow;
+  width: 100%;
+  float: left;
+}
+
+.middle .inner {
+  margin-left: 300px;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.left, .middle, .right {
+  padding-bottom: 9999px;
+  margin-bottom: -9999px;
+}
