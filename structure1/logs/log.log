@@ -1,0 +1,64 @@
+[2020-04-19T16:23:34.478] [ERROR] cheese - Cheese is too ripe!
+[2020-04-19T16:25:57.023] [ERROR] cheese - Cheese is too ripe!
+[2020-04-19T16:40:35.568] [ERROR] cheese - ReferenceError: name is not defined
+    at /Users/Marvin/space/github/codes/structure1/controllers/IndexController.js:11:62
+    at dispatch (/Users/Marvin/space/github/codes/structure1/node_modules/koa-simple-router/index.js:186:18)
+    at Router._lookup (/Users/Marvin/space/github/codes/structure1/node_modules/koa-simple-router/index.js:198:12)
+    at /Users/Marvin/space/github/codes/structure1/node_modules/koa-simple-router/index.js:138:21
+    at dispatch (/Users/Marvin/space/github/codes/structure1/node_modules/koa-compose/index.js:42:32)
+    at serve (/Users/Marvin/space/github/codes/structure1/node_modules/koa-static/index.js:53:15)
+[2020-04-19T23:36:50.544] [ERROR] cheese - { code: 1, message: 'node-fetch error', data: [] }
+[2020-04-19T23:40:36.346] [ERROR] cheese - {
+  code: 1,
+  message: 'node-fetch error',
+  data: [],
+  rawError: FetchError: request to http://locahost/java/books/index failed, reason: getaddrinfo ENOTFOUND locahost
+      at ClientRequest.<anonymous> (/Users/Marvin/space/github/codes/structure1/node_modules/node-fetch/lib/index.js:1455:11)
+      at ClientRequest.emit (events.js:209:13)
+      at Socket.socketErrorListener (_http_client.js:406:9)
+      at Socket.emit (events.js:209:13)
+      at emitErrorNT (internal/streams/destroy.js:91:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:59:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+    message: 'request to http://locahost/java/books/index failed, reason: getaddrinfo ENOTFOUND locahost',
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  }
+}
+[2020-04-19T23:45:49.477] [ERROR] cheese - {
+  code: 1,
+  message: 'node-fetch error',
+  data: [],
+  rawError: FetchError: request to http://locahost/java/books/index failed, reason: getaddrinfo ENOTFOUND locahost
+      at ClientRequest.<anonymous> (/Users/Marvin/space/github/codes/structure1/node_modules/node-fetch/lib/index.js:1455:11)
+      at ClientRequest.emit (events.js:209:13)
+      at Socket.socketErrorListener (_http_client.js:406:9)
+      at Socket.emit (events.js:209:13)
+      at emitErrorNT (internal/streams/destroy.js:91:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:59:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+    message: 'request to http://locahost/java/books/index failed, reason: getaddrinfo ENOTFOUND locahost',
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  }
+}
+[2020-04-20T10:02:02.957] [ERROR] cheese - {
+  code: 1,
+  message: 'node-fetch error',
+  data: [],
+  rawError: FetchError: request to http://locahost/java/books/create failed, reason: getaddrinfo ENOTFOUND locahost
+      at ClientRequest.<anonymous> (/Users/Marvin/space/github/codes/structure1/node_modules/node-fetch/lib/index.js:1455:11)
+      at ClientRequest.emit (events.js:209:13)
+      at Socket.socketErrorListener (_http_client.js:406:9)
+      at Socket.emit (events.js:209:13)
+      at emitErrorNT (internal/streams/destroy.js:91:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:59:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+    message: 'request to http://locahost/java/books/create failed, reason: getaddrinfo ENOTFOUND locahost',
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  }
+}

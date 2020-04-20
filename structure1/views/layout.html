@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  {% block styles %}{% endblock %}
+</head>
+
+<body>
+  {% block content %}{% endblock %}
+  <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>
