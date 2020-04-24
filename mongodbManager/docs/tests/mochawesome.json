@@ -1,0 +1,140 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-04-24T01:29:54.556Z",
+    "end": "2020-04-24T01:29:54.660Z",
+    "duration": 104,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2d7404ae-c45b-4b8b-ad66-c06585aaef8a",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2efb3b7e-01b2-44e7-a4c1-74f934729064",
+          "title": "仓位业务测试",
+          "fullFile": "/Users/Marvin/space/github/codes/mongodbManager/tests/position.spec.js",
+          "file": "/tests/position.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "创建仓位记录",
+              "fullTitle": "仓位业务测试 创建仓位记录",
+              "timedOut": false,
+              "duration": 61,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "request\n  .post('/position/create')\n  .send({\n    account: '001',\n    stock: 'AMZN',\n    quantity: 1,\n    price: 1650\n  })\n  .expect(200)\n  .expect('Content-Type', /json/)\n  .end(function (err, res) {\n    if (err) {\n      done(err)\n    }\n    if (res.body.code === 0 && res.body.message === '创建成功') {\n      done()\n    } else {\n      done(new Error('创建仓位记录出错'))\n    }\n  })",
+              "err": {},
+              "uuid": "6502d3d2-f0d5-4cb4-9611-2658e0b6eb58",
+              "parentUUID": "2efb3b7e-01b2-44e7-a4c1-74f934729064",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "根据帐号查询仓位记录",
+              "fullTitle": "仓位业务测试 根据帐号查询仓位记录",
+              "timedOut": false,
+              "duration": 16,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "request\n  .get('/position/001')\n  .expect(200)\n  .expect('Content-Type', /json/)\n  .end(function (err, res) {\n    const entry = res.body.data[0]\n    if (err) {\n      done(err)\n    }\n    if (\n      entry.account === '001' &&\n      entry.stock === 'AMZN' &&\n      entry.quantity === 1 &&\n      entry.price === 1650\n    ) {\n      oid = entry._id\n      done()\n    } else {\n      done(new Error('查询仓位记录出错'))\n    }\n  })",
+              "err": {},
+              "uuid": "f44263db-80fc-4619-9d6f-4f53847eae4b",
+              "parentUUID": "2efb3b7e-01b2-44e7-a4c1-74f934729064",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "根据帐号id删除仓位记录",
+              "fullTitle": "仓位业务测试 根据帐号id删除仓位记录",
+              "timedOut": false,
+              "duration": 7,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "request\n  .delete(`/position/${oid}/delete`)\n  .expect(200)\n  .end(function (err, res) {\n    if (err) done(err)\n    if (res.text === '仓位记录删除成功') {\n      done()\n    } else {\n      done(new Error('删除仓位记录失败'))\n    }\n  })",
+              "err": {},
+              "uuid": "8ba62399-9719-4890-a2b5-aaf611a4491f",
+              "parentUUID": "2efb3b7e-01b2-44e7-a4c1-74f934729064",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6502d3d2-f0d5-4cb4-9611-2658e0b6eb58",
+            "f44263db-80fc-4619-9d6f-4f53847eae4b",
+            "8ba62399-9719-4890-a2b5-aaf611a4491f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 84,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.1.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.0"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "/Users/Marvin/space/github/codes/mongodbManager/docs/tests"
+      },
+      "version": "5.1.0"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2020-04-23T15:26:38.671Z",
+    "end": "2020-04-23T15:26:38.723Z",
+    "duration": 52,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ed0bd074-8b0b-474c-8707-313cec902999",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9fd219bc-45f2-4217-b81c-ed958e30ef70",
+          "title": "仓位业务测试",
+          "fullFile": "/Users/Marvin/space/github/codes/mongodbManager/tests/position.spec.js",
+          "file": "/tests/position.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "创建仓位记录",
+              "fullTitle": "仓位业务测试 创建仓位记录",
+              "timedOut": false,
+              "duration": 33,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "request\n  .post('/position/create', {\n    account: '001',\n    stock: 'AMZN',\n    quantity: 1,\n    price: 1650\n  })\n  .expect(200)\n  .expect('Content-Type', /json/)\n  .end(function (err, res) {\n    if (err) {\n      done(err)\n    }\n    if (res.body.code === 0 && res.body.message === '创建成功') {\n      done()\n    } else {\n      done(new Error('创建仓位记录出错'))\n    }\n  })",
+              "err": {
+                "message": "Error: expected 200 \"OK\", got 500 \"Internal Server Error\"",
+                "estack": "Error: expected 200 \"OK\", got 500 \"Internal Server Error\"\n    at Test._assertStatus (node_modules/supertest/lib/test.js:268:12)\n    at Test._assertFunction (node_modules/supertest/lib/test.js:283:11)\n    at Test.assert (node_modules/supertest/lib/test.js:173:18)\n    at localAssert (node_modules/supertest/lib/test.js:131:12)\n    at /Users/Marvin/space/github/codes/mongodbManager/node_modules/supertest/lib/test.js:128:5\n    at Test.Request.callback (node_modules/superagent/lib/node/index.js:728:3)\n    at IncomingMessage.<anonymous> (node_modules/superagent/lib/node/index.js:916:18)\n    at endReadableNT (_stream_readable.js:1178:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+                "diff": null
+              },
+              "uuid": "705539f0-871c-4451-8c4f-e5ef69db539a",
+              "parentUUID": "9fd219bc-45f2-4217-b81c-ed958e30ef70",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "705539f0-871c-4451-8c4f-e5ef69db539a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 33,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.1.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.0"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "../docs/tests"
+      },
+      "version": "5.1.0"
+    }
+  }
+}
