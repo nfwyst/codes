@@ -1,24 +1,79 @@
 {
-  "devFiles": [
-    "static/development/dll/dll_dc8ac110ce5d8530b237.js",
-    "static/development/dll/dll_dc8ac110ce5d8530b237.js.map"
-  ],
+  "devFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/7bQRzCBbuSvrRZkAnWvOF/_buildManifest.js",
+    "static/7bQRzCBbuSvrRZkAnWvOF/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
     "/_app": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
     ],
     "/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
     ],
     "/_polyfills": [
-      "static/runtime/polyfills.js",
-      "static/runtime/polyfills.js.map"
+      "static/runtime/polyfills-ef69e3520fae86d5dd27.js"
+    ],
+    "/components/Layout": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/detail": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/films": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/list": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/css/styles.50c78e24.chunk.css",
+      "static/chunks/styles.1e0093b7e21f3b574adb.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/nestStyle": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/chunks/72b4d2c6308fbbae5354081128a83467b9a4de92.82b7337d85f15f4914bd.js",
+      "static/chunks/49d3db0ec5846ea1ae37a6f3bf32c941d19aeebf.1bbbc10a10de867b9cde.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
+    ],
+    "/nopermission": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/framework.0f140d5eb2070c7e423d.js",
+      "static/runtime/main-45e7987bcb64ea2ca55d.js"
     ]
   }
 }

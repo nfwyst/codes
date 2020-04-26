@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{Xj6D:function(n,t,e){"use strict";e.r(t);var u=e("q1tI"),i=e.n(u),o=e("Q0LR"),w=i.a.createElement;t.default=function(){return w(o.default,null,w("h2",null,"detail-\u8be6\u60c5"))}},vUjY:function(n,t,e){(window.__NEXT_P=window.__NEXT_P||[]).push(["/detail",function(){return e("Xj6D")}])}},[["vUjY",0,1,2,3]]]);
