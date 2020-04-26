@@ -3,3 +3,6 @@ structure1/node_modules
 expressdemo/node_modules
 mongodbManager/node_modules
 ssr/node_modules
+nextjs/node_modules
+nextjs-with-redux/node_modules
+
