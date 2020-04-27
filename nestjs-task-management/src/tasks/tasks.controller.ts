@@ -1,5 +1,5 @@
 import {
-  Controller, Get, Post, Body, Param, Delete, Patch, Query, UsePipes, ValidationPipe
+  Controller, Get, Post, Body, Param, Delete, Patch, Query, UsePipes, ValidationPipe, ParseIntPipe
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskStatus } from './types/tasks-status.enum';
@@ -12,36 +12,33 @@ import { Task } from './tasks.entity';
 export class TasksController {
   constructor(private tasksService: TasksService) { }
 
-  // @Get()
-  // @UsePipes(ValidationPipe)
-  // getTasks(@Query() getTasksFilterDto: GetTasksFilterDto): Task[] {
-  //   if(Object.keys(getTasksFilterDto).length) {
-  //     return this.tasksService.getTasksWithFilters(getTasksFilterDto)
-  //   }
-  //   return this.tasksService.getAllTasks()
-  // }
+  @Get()
+  @UsePipes(ValidationPipe)
+  getTasks(@Query() getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.tasksService.getTasks(getTasksFilterDto)
+  }
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createTask(@Body() createTaskDto: CreateTaskDto): Task {
-  //   return this.tasksService.createTask(createTaskDto)
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto)
+  }
 
-  // @Get('/:id')
-  // getTaskById(@Param('id') id: string): Task | never {
-  //   return this.tasksService.getTaskById(id)
-  // }
+  @Get('/:id')
+  getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> | never {
+    return this.tasksService.getTaskById(id)
+  }
 
-  // @Delete('/:id')
-  // deleteTaskById(@Param('id') id: string): void {
-  //   return this.tasksService.deleteTaskById(id)
-  // }
+  @Delete('/:id')
+  deleteTaskById(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.tasksService.deleteTaskById(id)
+  }
 
-  // @Patch('/:id/status')
-  // updateTaskStatusById(
-  //   @Param('id') id: string,
-  //   @Body('status', TaskStatusValidationPipe) status: TaskStatus
-  // ): Task | never {
-  //   return this.tasksService.updateTaskStatusById(id, status)
-  // }
+  @Patch('/:id/status')
+  updateTaskStatusById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus
+  ): Promise<Task> | never {
+    return this.tasksService.updateTaskStatusById(id, status)
+  }
 }
