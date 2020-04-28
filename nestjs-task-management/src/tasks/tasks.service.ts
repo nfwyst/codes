@@ -22,19 +22,23 @@ export class TasksService {
     return this.taskRepository.createTask(createTaskDto, user)
   }
 
-  async getTaskById(id: number): Promise<Task> | never {
-    const found = await this.taskRepository.findOne(id)
+  async getTaskById(id: number, user: User): Promise<Task> | never {
+    const found = await this.taskRepository.findOne({
+      where: { id, userId: user.id }
+    })
     if (!found) throw new NotFoundException(`Task with id ${id} not found!`)
     return found
   }
 
-  async deleteTaskById(id: number): Promise<void> {
-    const { affected } = await this.taskRepository.delete(id)
+  async deleteTaskById(id: number, user: User): Promise<void> {
+    const { affected } = await this.taskRepository.delete({
+      id, userId: user.id
+    })
     if (affected === 0) throw new NotFoundException(`Task with id ${id} not found!`)
   }
 
-  async updateTaskStatusById(id: number, status: TaskStatus): Promise<Task> | never {
-    const task = await this.getTaskById(id)
+  async updateTaskStatusById(id: number, status: TaskStatus, user: User): Promise<Task> | never {
+    const task = await this.getTaskById(id, user)
     if (task) task.status = status
     await task.save()
     return task
