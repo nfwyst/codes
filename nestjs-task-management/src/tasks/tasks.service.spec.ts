@@ -102,4 +102,20 @@ describe('TaskService', () => {
       expect(taskService.deleteTaskById(1, { id: 2 } as User)).rejects.toThrow(NotFoundException)
     })
   })
+
+  describe('updateTaskStatusById', () => {
+    it('update a task status', async () => {
+      const save = jest.fn().mockResolvedValue(true)
+      taskService.getTaskById = jest.fn().mockResolvedValue({
+        status: TaskStatus.OPEN,
+        save
+      })
+      expect(taskService.getTaskById).not.toHaveBeenCalled()
+      expect(save).not.toHaveBeenCalled()
+      const result = await taskService.updateTaskStatusById(1, TaskStatus.DONE, { username: 'Test user' } as User)
+      expect(taskService.getTaskById).toHaveBeenCalled()
+      expect(save).toHaveBeenCalled()
+      expect(result.status).toEqual(TaskStatus.DONE)
+    })
+  })
 })
