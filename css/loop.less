@@ -1,0 +1,8 @@
+.gen-col(@n) when (@n > 0) {
+  .get-col(@n -1);
+  .col-@{n} {
+    width: (100 / 12 * @n) / 100;
+  }
+}
+
+.gen-col(12)

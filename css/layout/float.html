@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>float 布局</title>
+  <style>
+    .container {
+      background: red;
+      width: 400px;
+      margin: 20px;
+      position: relative;
+    }
+
+    .p1 {
+      background: green;
+      float: left;
+      width: 200px;
+      height: 50px;
+    }
+
+    .container2::after {
+      content: 'anyway';
+      clear: both;
+      display: block;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .absolute {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      left: 0;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <span class="p1">float</span>
+    <div class="p2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut
+      doloremque et excepturi non veniam voluptatibus cupiditate, totam, itaque
+      eos earum necessitatibus, adipisci omnis fugiat laudantium rerum nam ad
+      veritatis facilis. Lorem ipsum dolor, sit amet consectetur adipisicing
+      elit. Cupiditate dolorum fuga adipisci delectus consequatur quia nam
+      pariatur iure obcaecati quae distinctio dignissimos accusantium molestias
+      officia, quas ea. Dolor, dolores voluptatem? Lorem, ipsum dolor sit amet
+      consectetur adipisicing elit. Accusantium eos quod impedit nobis id non!
+      Inventore in cumque maxime molestiae cupiditate et rem incidunt ad
+      tenetur, voluptate autem quasi earum? Lorem ipsum dolor sit, amet
+      consectetur adipisicing elit. Pariatur ullam vel, aperiam cumque veritatis
+      voluptatibus ipsum non unde sed odio tempore eum delectus obcaecati eaque
+      repellat exercitationem. Ut, expedita autem.
+    </div>
+  </div>
+
+  <div class="container2">
+    <span>写几个字</span>
+    <span class="p1">float</span>
+    <span class="p1">float</span>
+    <div class="absolute">hello world</div>
+  </div>
+</body>
+
+</html>

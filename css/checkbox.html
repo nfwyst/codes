@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkbox so handsome</title>
+  <style>
+    .checkbox input {
+      display: none;
+    }
+
+    .checkbox input:checked+label {
+      color: red;
+    }
+
+    #ok {
+      color: green !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="checkbox">
+    <input type="checkbox" id="handsome">
+    <label for="handsome">我很帅</label>
+  </div>
+  <div id="ok" style="color: red;">hello</div>
+</body>
+
+</html>

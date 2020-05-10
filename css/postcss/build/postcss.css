@@ -1,0 +1,10 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.box {
+  box-shadow: 0 0 3px rgba(255, 255, 255, .3);
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9wb3N0Y3NzLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVU7RUFDVixTQUFTO0FBQ1g7O0FBRUE7RUFDRSwyQ0FBMkM7QUFDN0MiLCJmaWxlIjoicG9zdGNzcy5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xufVxuXG4uYm94IHtcbiAgYm94LXNoYWRvdzogMCAwIDNweCByZ2JhKDI1NSwgMjU1LCAyNTUsIC4zKTtcbn1cbiJdfQ== */
