@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.scss"],"names":[],"mappings":"AAAA;EACE,SAAA;EACA,UAAA;EACA,WAAA;EACA,YAAA;;AAEA;EACE,wDAAA;EACA,UAAA","file":"parcel.77de5100.css","sourceRoot":"..","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%;\n\n  .main {\n    background: url('./images/1.png');\n    color: red;\n  }\n}\n"]}
