@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas test</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
+
+    #canvas {
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, .5);
+      position: absolute;
+      left: 10%;
+      top: 5%;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script src="./utils.js"></script>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+
+    let W = canvas.width = 800
+    let H = canvas.height = 600
+
+    const util = new CanvasUtil()
+    const mouse = util.getOffset(canvas)
+
+    drawSystem()
+
+    canvas.onmousemove = () => {
+      ctx.clearRect(0, 0, W, H)
+
+      let dx = mouse.x - W / 2
+      let dy = mouse.y - H / 2
+
+      let angle = Math.atan2(dy, dx) * 180 / Math.PI
+
+      drawSystem()
+      ctx.beginPath()
+      ctx.lineTo(mouse.x, mouse.y)
+      ctx.lineTo(W / 2, H / 2)
+      ctx.stroke()
+
+      ctx.fillText(angle, mouse.x, mouse.y)
+    }
+
+    function drawSystem() {
+      ctx.save()
+
+      ctx.lineWidth = 1.5
+      ctx.beginPath()
+      ctx.moveTo(0, H / 2)
+      ctx.lineTo(W, H / 2)
+      ctx.moveTo(W / 2, 0)
+      ctx.lineTo(W / 2, H)
+      ctx.stroke()
+
+      ctx.restore()
+    }
+  </script>
+</body>
+
+</html>
