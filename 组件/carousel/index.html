@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carousel</title>
+  <style>
+    body {
+      overflow: scroll;
+      margin: 0;
+    }
+
+    #content #carousel_wrap {
+      position: relative;
+      margin: 0 auto;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #content #carousel_wrap #carousel_images {
+      position: absolute;
+      border: 0;
+      outline: none;
+      white-space: nowrap;
+      width: 100%;
+      margin: 0px;
+      font-size: 0;
+    }
+
+    #content #carousel_wrap #carousel_images img {
+      vertical-align: bottom;
+      width: 100%;
+    }
+
+    #content #carousel_wrap .arrow {
+      position: absolute;
+      font-weight: bold;
+      font-size: 50px;
+      color: lightgray;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition-property: opacity;
+      transition-duration: 0.5s;
+    }
+
+    #content #carousel_wrap .arrow:hover {
+      opacity: 0.5;
+    }
+
+    #content #carousel_wrap .left-arrow {
+      left: 20px;
+    }
+
+    #content #carousel_wrap .right-arrow {
+      right: 20px;
+    }
+
+    #content #carousel_wrap #dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    #content #carousel_wrap .dot {
+      background-color: white;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 4px;
+      opacity: 0.2;
+      cursor: pointer;
+    }
+
+    #content #carousel_wrap .active {
+      opacity: 1;
+    }
+
+    .transition {
+      transition-property: left;
+      transition-duration: 1s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <div id="carousel_wrap">
+      <div id="carousel_images" class="transition">
+        <img src="https://s2.ax1x.com/2019/06/05/VNGTdP.jpg">
+        <img src="https://s2.ax1x.com/2019/06/05/VNG5qI.jpg">
+        <img src="https://s2.ax1x.com/2019/06/05/VNGoZt.jpg">
+        <img src="https://s2.ax1x.com/2019/06/05/VNGTdP.jpg">
+        <img src="https://s2.ax1x.com/2019/06/05/VNG5qI.jpg">
+      </div>
+      <span class="arrow left-arrow">&lt;</span>
+      <span class="arrow right-arrow">&gt;</span>
+      <div id="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+    <div id="test">
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+        corrupti quibusdam ipsa ad, sit quidem voluptatibus recusandae eos
+        tenetur aliquam architecto cumque eveniet minima quod hic. Similique est
+        sequi adipisci!</h1>
+      <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+        autem placeat beatae eum totam aperiam ut magni neque eos explicabo!
+        Inventore nulla necessitatibus magni iste exercitationem vitae dolor
+        culpa deleniti.</h1>
+    </div>
+  </div>
+  <script>
+    var carouImg = document.getElementById("carousel_images");
+    var carouWrap = document.getElementById("carousel_wrap");
+    var img = carouImg.getElementsByTagName("img")[0];
+    var leftArrow = document.getElementsByClassName("left-arrow")[0];
+    var rightArrow = document.getElementsByClassName("right-arrow")[0];
+    var oBtn = document.getElementsByClassName("dot");
+    var index = 0;
+    var index_length = oBtn.length;
+
+    window.onload = function () {
+      carouImg.style.left = -img.clientWidth + "px";
+      carouWrap.style.height = img.offsetHeight + "px";
+      document.body.onresize = function () {
+        carouImg.style.left = -img.clientWidth + "px";
+        carouWrap.style.height = img.offsetHeight + "px";
+      }
+
+      rightArrow.onclick = next_pic
+
+      function next_pic() {
+        var left = parseInt(carouImg.style.left);
+        if (left <= (-img.clientWidth) * (index_length + 1)) {
+          carouImg.classList.remove("transition");
+          var newLeft = -img.clientWidth * 1;
+          carouImg.style.left = newLeft + 'px';
+          newLeft = -img.clientWidth * 2;
+          carouImg.classList.add("transition");
+          index = 1;
+        } else {
+          var newLeft = parseInt(carouImg.style.left) - img.clientWidth;
+          (index == (index_length - 1)) ? index = 0 : index += 1;
+        }
+        carouImg.style.left = newLeft + 'px';
+        showCurrentDot(index)
+      }
+
+      leftArrow.onclick = pre_pic
+
+      function pre_pic() {
+        var left = parseInt(carouImg.style.left);
+        if (left >= -10) {
+          carouImg.classList.remove("transition");
+          var newLeft = -img.clientWidth * index_length;
+          carouImg.style.left = newLeft + 'px';
+          newLeft = -img.clientWidth * (index_length - 1);
+          carouImg.classList.add("transition");
+          index = index_length - 2;
+        }
+        else {
+          var newLeft = parseInt(carouImg.style.left) + img.clientWidth;
+          (index == 0) ? index = (index_length - 1) : index -= 1;
+        }
+        carouImg.style.left = newLeft + 'px';
+        showCurrentDot(index)
+      }
+
+      function showCurrentDot(index) {
+        for (let i = 0; i < oBtn.length; ++i) {
+          (i == index) ? oBtn[i].classList.add("active") : oBtn[i].classList.remove("active");
+        }
+      }
+
+      var timer = setInterval(function () {
+        next_pic();
+      }, 3000);
+
+      carouWrap.onmouseover = function () {
+        clearInterval(timer);
+      }
+
+      carouWrap.onmouseout = function () {
+        timer = setInterval(function () {
+          next_pic();
+        }, 3000);
+      }
+    }
+  </script>
+</body>
+
+</html>
