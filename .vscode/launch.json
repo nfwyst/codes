@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/简易版koa/app.js"
+      "program": "${workspaceFolder}/算法/recursive.js"
     }
   ]
 }
