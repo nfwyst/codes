@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>interview</title>
+  <style>
+    .button {
+      width: 120px;
+      height: 30px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background-color: blue;
+      color: #fff;
+      margin: 10px;
+      text-align: center;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      flex-flow: row nowrap;
+      background: rgba(200, 200, 200, .3);
+    }
+
+    .actions {
+      padding: 10px;
+    }
+
+    .actions .preview {
+      padding-left: 10px;
+    }
+
+    #spiner {
+      height: 48px;
+      width: 48px;
+      border: 5px solid rgba(150, 150, 150, 0.2);
+      border-radius: 50%;
+      border-top-color: rgb(150, 150, 150);
+      animation: rotate 1s 0s infinite ease-in-out alternate;
+      display: none;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .result-preview {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="actions">
+      <div class="button" id="upload">
+        上传图片
+        <input type="file" hidden accept="images/jpeg,image/png,image/jpg"
+          multiple="false">
+      </div>
+      <div class="button" id="base64">转换为 base64</div>
+      <div class="button" id="base64-uploader">上传base64</div>
+      <div class="preview">
+        <textarea cols="30" rows="10">
+        </textarea>
+      </div>
+      <div class="result-preview">
+        <h1>上传结果</h1>
+        <div id="spiner"></div>
+        <div id="result-content"></div>
+      </div>
+    </div>
+    <canvas width="300px" height="300px" id="canvas"></canvas>
+  </div>
+</body>
+
+<script>
+  window.onload = () => {
+    const uploadButton = document.getElementById('upload')
+    const uploadInput = document.querySelector('.actions [type=file]')
+    const canvas = document.getElementById("canvas");
+    const canvasContext = canvas.getContext("2d");
+    const base64Convert = document.getElementById('base64')
+    const base64TextArea = document.querySelector('.preview textarea')
+    const base64Uploader = document.getElementById('base64-uploader')
+    const spiner = document.getElementById('spiner')
+    const resultContent = document.getElementById('result-content')
+    let base64 = null
+
+    uploadButton.onclick = () => uploadInput.click()
+    base64Convert.onclick = () => {
+      if (base64) {
+        base64TextArea.value = base64
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.value = base64
+        input.select()
+        document.execCommand('copy')
+        document.body.removeChild(input)
+        alert("复制base64成功");
+      } else {
+        alert('请上传图片')
+      }
+    }
+    uploadButton.ondragover = e => {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+    uploadButton.ondragend = e => {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+    uploadButton.ondrop = (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      const file = e.dataTransfer.files[0]
+      process(file)
+    }
+    uploadInput.onchange = (e) => {
+      const file = e.target.files[0]
+      process(file)
+    }
+    const process = (file) => {
+      const reader = new FileReader();
+      const image = new Image()
+      image.onload = () => {
+        canvas.width = image.width
+        canvas.height = image.height
+        canvasContext.drawImage(image, 0, 0)
+        const pixels = canvasContext.getImageData(0, 0, image.width, image.height)
+        const pixeldata = pixels.data
+        for (let i = 0, len = pixeldata.length; i < len; i += 4) {
+          const gray = parseInt(pixels.data[i] * 0.3 + pixels.data[i + 1] * 0.59 + pixels.data[i + 2] * 0.11);
+          pixels.data[i] = gray;
+          pixels.data[i + 1] = gray;
+          pixels.data[i + 2] = gray;
+        }
+        canvasContext.putImageData(pixels, 0, 0);
+        base64 = canvas.toDataURL(file.type)
+      }
+      reader.onload = () => {
+        image.src = reader.result
+      }
+      reader.readAsDataURL(file);
+    }
+    base64Uploader.onclick = (e) => {
+      if (!base64) {
+        alert('请上传图片')
+        return false
+      }
+      const xhr = new XMLHttpRequest()
+      const form = new FormData()
+      form.append('file', base64)
+      xhr.open('post', 'http://localhost:3000/upload', true)
+      xhr.send(form)
+      spiner.style.display = 'block'
+      xhr.onreadystatechange = (e) => {
+        if (xhr.status === 200 && xhr.readyState === 4) {
+          const responseText = xhr.responseText
+          e.target.value = null
+          spiner.style.display = 'none'
+          resultContent.textContent = responseText
+        }
+      }
+    }
+  }
+</script>
+
+</html>
