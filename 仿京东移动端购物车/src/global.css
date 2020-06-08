@@ -1,0 +1,202 @@
+/* list page */
+.am-list-item img {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.price {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.am-list-header {
+  position: sticky;
+  top: 0;
+  z-index: 10000000;
+  background: #fff;
+}
+
+.forward-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.forward-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.forward-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.forward-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms;
+}
+
+.back-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.back-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.back-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.back-exit-active {
+  opacity: 0;
+  transform: translate(100%);
+  transition: all 500ms;
+}
+
+#spiner {
+  height: 48px;
+  width: 48px;
+  border: 5px solid rgba(150, 150, 150, 0.2);
+  border-radius: 50%;
+  border-top-color: rgb(150, 150, 150);
+  animation: rotate 1s 0s infinite ease-in-out alternate;
+  margin: auto;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* detail page */
+.detail .wrapper img {
+  width: 100%;
+  max-height: 320px;
+}
+
+.detail .price,
+.detail .desc,
+.detail .numrow {
+  padding: 3px 20px;
+}
+
+.detail .price .bold {
+  font-size: 23px;
+  font-weight: bolder;
+}
+
+.detail .price .light {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.detail .desc {
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.numrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numrow input {
+  background-color: #eee;
+  border: none;
+  width: 35px;
+  height: 100%;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.numrow span:not(.light):not(.bold) {
+  margin: 0 5px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.numrow span.disabled {
+  color: #eee;
+}
+
+.numrow .add {
+  background-color: red;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+/* tab bar */
+.am-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  z-index: 99999;
+}
+
+/* overfow text */
+.overflow-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* card */
+.hand {
+  cursor: pointer;
+}
+
+.gopay {
+  background-color: red;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.total-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: auto;
+  bottom: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.total-bar span {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.numrow .gopay {
+  padding: 4px 18px;
+}
+
+.am-navbar-left {
+  cursor: pointer;
+}
